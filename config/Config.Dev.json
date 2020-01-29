@@ -1,0 +1,7 @@
+{
+    "url": "http://d8fb248b.ngrok.io",
+    "url_websocket": "ws://d8fb248b.ngrok.io/api/Chat",
+    "profile_picture_path" : "https://filestoragesoundscout.blob.core.windows.net/profile-pictures/",
+    "profile_video_path": "https://filestoragesoundscout.blob.core.windows.net/profile-videos/",
+    "show_picture_path": "https://filestoragesoundscout.blob.core.windows.net/shows/"
+}       

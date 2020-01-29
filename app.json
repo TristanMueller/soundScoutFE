@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "SoundScout",
+    "slug": "SoundScout",
+    "privacy": "public",
+    "sdkVersion": "36.0.0",
+    "android": {
+      "package": "com.SoundScoutCo.SoundScout",
+      "versionCode": 2
+    },
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "2.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/SoundScoutHighResBlackSquareEdge.png",
+    "splash": {
+      "image": "./assets/SoundScoutHighResBlackSquareEdge.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.SoundScoutCo.SoundScout",
+      "supportsTablet": false
+    }
+  }
+}

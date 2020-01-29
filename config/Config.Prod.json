@@ -1,0 +1,7 @@
+{
+    "url": "https://soundscout.azurewebsites.net",
+    "url_websocket": "ws://soundscout.azurewebsites.net/api/Chat",
+    "profile_picture_path" : "https://filestoragesoundscout.blob.core.windows.net/profile-pictures/",
+    "profile_video_path": "https://filestoragesoundscout.blob.core.windows.net/profile-videos/",
+    "show_picture_path": "https://filestoragesoundscout.blob.core.windows.net/shows/"
+}       
