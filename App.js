@@ -1,11 +1,12 @@
 import React from 'react';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {  createAppContainer } from 'react-navigation'; // Version can be specified in package.json
 import {createStackNavigator } from 'react-navigation-stack' 
 import SignUpScreen from './components/SignUpScreen'
 import HomeScreen from './components/HomeScreen';
 import { Image, View } from 'react-native';
 const config = require('./config/Config.json');
-import {Button, H1, Item, Input,Text,Icon,Thumbnail} from 'native-base';
+import {Button, H1, Item, Input,Text,Icon,Thumbnail,Root,Container} from 'native-base';
 
 class LoginScreen extends React.Component {
   static navigationOptions = { header: null, gesturesEnabled: false };
@@ -21,33 +22,37 @@ class LoginScreen extends React.Component {
   render() {
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Image source={require('./assets/Logo.jpg')} style={{height:200,width:200}}></Image>
-        <Text style={{alignSelf: 'center'}}>{this.state.message}</Text>
-        <Item>
-          <Input  onChangeText={(username) => this.setState({username})} placeholder="Username" />
-        </Item>
-        <Item>
-          <Input  onChangeText={(password) => this.setState({password})} placeholder="Password" />
-        </Item>
-        <Item>
-          <Button
-            dark
-            onPress={() => this.Login()}
-          >
-            <Text>Login</Text>
-          </Button>
-        </Item>
-        <Item>
-          <Button
-            dark 
-            onPress={() => this.props.navigation.navigate('SignUp')}
-          >
-            <Text>Sign Up</Text>
-          </Button>
-        </Item>
+      <KeyboardAwareScrollView>
+        <Container>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Image source={require('./assets/Logo.jpg')} style={{height:200,width:200}}></Image>
+            <Text style={{alignSelf: 'center'}}>{this.state.message}</Text>
+            <Item>
+              <Input  onChangeText={(username) => this.setState({username})} placeholder="Username" />
+            </Item>
+            <Item>
+              <Input  onChangeText={(password) => this.setState({password})} placeholder="Password" secureTextEntry ={true}/>
+            </Item>
+            <Item>
+              <Button
+                dark
+                onPress={() => this.Login()}
+                >
+                <Text>Login</Text>
+              </Button>
+            </Item>
+            <Item>
+              <Button
+                dark 
+                onPress={() => this.props.navigation.navigate('SignUp')}
+                >
+                <Text>Sign Up</Text>
+              </Button>
+            </Item>
 
-      </View>
+          </View>
+        </Container>
+      </KeyboardAwareScrollView>
     );
   }
   Login(){

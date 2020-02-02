@@ -1,7 +1,8 @@
 import React from 'react';
 import {  View, Image } from 'react-native';
-import {Button, Item, Input,Text} from 'native-base';
+import {Button, Item, Input,Text, Container} from 'native-base';
 import { requestPermissionsAsync } from 'expo-location';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const config = require('../config/Config.json');
 
 export default class SignUpScreen extends React.Component {
@@ -18,45 +19,49 @@ export default class SignUpScreen extends React.Component {
   }
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Image source={require('../assets/Logo.jpg')} style={{height:200,width:200}}></Image>
-        <Text style={{color: "#ffffff"}}>Welcome to soundScout please sign up</Text>
-        <Text>
-          {renderIf(this.state.username.length < 5 && this.state.username.length > 0 || this.state.username.length > 25 ,<UsernameFieldValidation/>)}
-          {renderIf(this.state.password.length < 10 && this.state.password.length > 0|| this.state.password.length > 50 ,<PasswordFieldValidation/>)}
-          {renderIf(this.state.password !== this.state.passwordConfirmation && this.state.password.length > 0 && this.state.passwordConfirmation.length > 0, <PasswordsDontMatch />)}
-        </Text>
-        <Text>{this.state.errorMessage}</Text>
-        <Item>
-          <Input  onChangeText={(username) => this.setState({username})} placeholder="Username" />
-        </Item>
-        <Item>
-          <Input  onChangeText={(password) => this.setState({password})} placeholder="Password" />
-        </Item>
-        <Item>
-          <Input  onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})} placeholder="Password Confirmation" />
-        </Item>
-        <Item>
-          <Input  onChangeText={(email) => this.setState({email})} placeholder="Email" />
-        </Item>
-        <Item>
-          <Button 
-            dark
-            onPress={() => SignUp(this)}
-          >
-            <Text>Sign Up</Text>
-          </Button>
-        </Item>
-        <Item>
-          <Button 
-            dark
-            onPress={() => this.props.navigation.navigate('Login')}
-          >
-            <Text>Go back to Login</Text>
-          </Button>
-        </Item>
+      <KeyboardAwareScrollView>
+        <Container>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Image source={require('../assets/Logo.jpg')} style={{height:200,width:200}}></Image>
+            <Text style={{color: "#ffffff"}}>Welcome to soundScout please sign up</Text>
+            <Text>
+              {renderIf(this.state.username.length < 5 && this.state.username.length > 0 || this.state.username.length > 25 ,<UsernameFieldValidation/>)}
+              {renderIf(this.state.password.length < 10 && this.state.password.length > 0|| this.state.password.length > 50 ,<PasswordFieldValidation/>)}
+              {renderIf(this.state.password !== this.state.passwordConfirmation && this.state.password.length > 0 && this.state.passwordConfirmation.length > 0, <PasswordsDontMatch />)}
+            </Text>
+            <Text>{this.state.errorMessage}</Text>
+            <Item>
+              <Input  onChangeText={(username) => this.setState({username})} placeholder="Username" />
+            </Item>
+            <Item>
+              <Input  onChangeText={(password) => this.setState({password})} placeholder="Password" />
+            </Item>
+            <Item>
+              <Input  onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})} placeholder="Password Confirmation" />
+            </Item>
+            <Item>
+              <Input  onChangeText={(email) => this.setState({email})} placeholder="Email" />
+            </Item>
+            <Item>
+              <Button 
+                dark
+                onPress={() => SignUp(this)}
+              >
+                <Text>Sign Up</Text>
+              </Button>
+            </Item>
+            <Item>
+              <Button 
+                dark
+                onPress={() => this.props.navigation.navigate('Login')}
+              >
+                <Text>Go back to Login</Text>
+              </Button>
+            </Item>
 
-      </View>
+          </View>
+        </Container>
+      </KeyboardAwareScrollView>
     );
   }
 }
