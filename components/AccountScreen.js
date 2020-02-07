@@ -136,15 +136,19 @@ export default class AccountScreen extends React.Component {
     }
 
     componentDidMount() {
-      this.getPermissionAsync();
-      this.getUserInformation();
+      if(!(global.username =="" || global.username ==null))
+      {
+        this.getPermissionAsync();
+        this.getUserInformation();
+      }
+  
     }
 
     getPermissionAsync = async () => {
       if (Constants.platform.ios) {
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
         if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
+          alert('Sorry, we need camera roll permissions to add a profile picture and video!');
         }
       }
     }
