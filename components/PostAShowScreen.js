@@ -2,7 +2,7 @@ import React from 'react';
 import { View,ScrollView } from 'react-native';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {Button, H1, Item, Input,Text,Icon,Thumbnail, Container,Spinner,Toast,Root} from 'native-base';
+import {Button, H1, Item, Input,Text,Icon,Thumbnail, Container,Spinner,Toast,Root,Picker} from 'native-base';
 import DrawerToggle from './DrawerToggle';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
@@ -38,8 +38,10 @@ export default class PostAShowScreen extends React.Component {
           month: null,
           day: null,
           show_start_time: null,
+          show_start_time_minutes: null,
           show_start_time_AM_PM: null,
           show_end_time: null,
+          show_end_time_minutes: null,
           show_end_time_AM_PM: null,
           postShowMessage: '',
           pending: false,
@@ -80,25 +82,161 @@ export default class PostAShowScreen extends React.Component {
                     <Input  onChangeText={(state) => this.setState({state})} placeholder="State" value={this.state.state}/>
                   </Item>
                   <Item>
+                    <View style={{width: "100%",flexDirection:"row"}}>
+                    <View style={{width:"35%"}}>
+                        <Picker
+                          placeholder="Year"
+                          placeholderStyle={{color:"#000000"}}
+                          mode="dropdown"
+                          selectedValue={this.state.year}
+                          onValueChange={x => this.setState({year:x})}
+                        >
+                          {this.yearPickerOptions()}
+                          
+                        </Picker>
+                      </View>
+                      <View style={{width:"35%"}}>
+                        <Picker
+                          placeholder="Month"
+                          placeholderStyle={{color:"#000000"}}
+                          mode="dropdown"
+                          selectedValue={this.state.month}
+                          onValueChange={x => this.setState({month:x})}
+                        >
+                          <Picker.Item label="January" value="1" />
+                          <Picker.Item label="February" value="2" />
+                          <Picker.Item label="March" value="3" />
+                          <Picker.Item label="April" value="4" />
+                          <Picker.Item label="May" value="5" />
+                          <Picker.Item label="June" value="6" />
+                          <Picker.Item label="July" value="7" />
+                          <Picker.Item label="August" value="8" />
+                          <Picker.Item label="September" value="9" />
+                          <Picker.Item label="October" value="10" />
+                          <Picker.Item label="November" value="11" />
+                          <Picker.Item label="December" value="12" />
+                        </Picker>
+                      </View>
+                      <View style={{width:"35%"}}>
+                        <Picker
+                          placeholder="Day"
+                          placeholderStyle={{color:"#000000"}}
+                          mode="dropdown"
+                          selectedValue={this.state.day}
+                          onValueChange={x => this.setState({day:x})}
+                        >
+                          {this.dayPickerOptions()}
+                          
+                        </Picker>
+                      </View>
+                    </View>
+                  </Item>
+                  {/* <Item>
                     <Input  onChangeText={(year) => this.setState({year})} placeholder="Year" value={this.state.year}/>
                     {yearRegex.test(this.state.year) ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
                     <Input  onChangeText={(month) => this.setState({month})} placeholder="Month" value={this.state.month}/>
                     {monthRegex.test(this.state.month) ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
                     <Input  onChangeText={(day) => this.setState({day})} placeholder="Day" value={this.state.day}/>
                     {dayRegex.test(this.state.day) ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
+                  </Item> */}
+                  <Item>
+
+                    <View style={{width: "100%",flexDirection:"row"}}>
+                      <View style={{width:"35%"}}>
+                        <Picker
+                          placeholder="Start Hour"
+                          placeholderStyle={{color:"#000000"}}
+                          mode="dropdown"
+                          selectedValue={this.state.show_start_time}
+                          onValueChange={x => this.setState({show_start_time:x})}
+                        >
+                          {this.hourPickerOptions()}
+                          
+                        </Picker>
+                      </View>
+                      <View style={{width:"35%"}}>
+                        <Picker
+                          placeholder="Start Minutes"
+                          placeholderStyle={{color:"#000000"}}
+                          mode="dropdown"
+                          selectedValue={this.state.show_start_time_minutes}
+                          onValueChange={x => this.setState({show_start_time_minutes:x})}
+                        >
+                          {this.timePickerOptions()}
+                          
+                        </Picker>
+                      </View>
+                      <View style={{width:"30%"}}>
+                        <Picker
+                          placeholder="AM/PM"
+                          placeholderStyle={{color:"#000000"}}
+                          mode="dropdown"
+                          selectedValue={this.state.show_start_time_AM_PM}
+                          onValueChange={x => this.setState({show_start_time_AM_PM:x})}
+                        >
+                          <Picker.Item label="AM" value="AM" />
+                          <Picker.Item label="PM" value="PM" />
+                          
+                        </Picker>
+                      </View>
+                      {/* <Input  onChangeText={(show_start_time) => this.setState({show_start_time})} placeholder="Starting time 00:00" value={this.state.show_start_time}/>
+                      {timeRegex.test(this.state.show_start_time) ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
+                      <Input  onChangeText={(show_start_time_AM_PM) => this.setState({show_start_time_AM_PM})} placeholder="AM/PM" value={this.state.show_start_time_AM_PM}/>
+                      {AMPMRegex.test(this.state.show_start_time_AM_PM) ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />} */}
+                    </View>
                   </Item>
                   <Item>
-                    <Input  onChangeText={(show_start_time) => this.setState({show_start_time})} placeholder="Starting time 00:00" value={this.state.show_start_time}/>
-                    {timeRegex.test(this.state.show_start_time) ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
-                    <Input  onChangeText={(show_start_time_AM_PM) => this.setState({show_start_time_AM_PM})} placeholder="AM/PM" value={this.state.show_start_time_AM_PM}/>
-                    {AMPMRegex.test(this.state.show_start_time_AM_PM) ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
+
+                    <View style={{width: "100%",flexDirection:"row"}}>
+                      <View style={{width:"35%"}}>
+                        <Picker
+                          placeholder="End Hour"
+                          mode="dropdown"
+                          placeholderStyle={{color:"#000000"}}
+                          selectedValue={this.state.show_end_time}
+                          onValueChange={x => this.setState({show_end_time:x})}
+                        >
+                          {this.hourPickerOptions()}
+                          
+                        </Picker>
+                      </View>
+                      <View style={{width:"35%"}}>
+                        <Picker
+                          placeholder="End Minutes"
+                          placeholderStyle={{color:"#000000"}}
+                          mode="dropdown"
+                          selectedValue={this.state.show_end_time_minutes}
+                          onValueChange={x => this.setState({show_end_time_minutes:x})}
+                        >
+                          {this.timePickerOptions()}
+                          
+                        </Picker>
+                      </View>
+                      <View style={{width:"30%"}}>
+                        <Picker
+                          placeholder="AM/PM"
+                          placeholderStyle={{color:"#000000"}}
+                          mode="dropdown"
+                          selectedValue={this.state.show_end_time_AM_PM}
+                          onValueChange={x => this.setState({show_end_time_AM_PM:x})}
+                        >
+                          <Picker.Item label="AM" value="AM" />
+                          <Picker.Item label="PM" value="PM" />
+                          
+                        </Picker>
+                      </View>
+                      {/* <Input  onChangeText={(show_start_time) => this.setState({show_start_time})} placeholder="Starting time 00:00" value={this.state.show_start_time}/>
+                      {timeRegex.test(this.state.show_start_time) ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
+                      <Input  onChangeText={(show_start_time_AM_PM) => this.setState({show_start_time_AM_PM})} placeholder="AM/PM" value={this.state.show_start_time_AM_PM}/>
+                      {AMPMRegex.test(this.state.show_start_time_AM_PM) ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />} */}
+                    </View>
                   </Item>
-                  <Item>
+                  {/* <Item>
                     <Input  onChangeText={(show_end_time) => this.setState({show_end_time})} placeholder="Ending time 00:00" value={this.state.show_end_time}/>
                     {timeRegex.test(this.state.show_end_time) ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
                     <Input  onChangeText={(show_end_time_AM_PM) => this.setState({show_end_time_AM_PM})} placeholder="AM/PM" value={this.state.show_end_time_AM_PM}/>
                     {AMPMRegex.test(this.state.show_end_time_AM_PM) ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
-                  </Item>
+                  </Item> */}
                   <Item>
                     <Input  onChangeText={(description) => this.setState({description})} placeholder="Description" value={this.state.description}/>
                   </Item>
@@ -128,13 +266,37 @@ export default class PostAShowScreen extends React.Component {
     componentDidMount() {
       this.getPermissionAsync();
     }
-
+    hourPickerOptions(){
+      var x = [];
+      for(var i = 1; i<=12;i++){
+        x.push(<Picker.Item key={i} label={i.toString()} value={i.toString()} />)
+      }
+      return x;
+    }
+    timePickerOptions(){
+      var x = [];
+      for(var i = 0; i < 60; i++){
+        x.push(<Picker.Item key={i} label={i.toString()} value={i.toString()} />)
+      }
+      return x;
+    }
+    yearPickerOptions(){
+      var x = [];
+      for(var i = 2020; i < 2030; i++){
+        x.push(<Picker.Item key={i} label={i.toString()} value={i.toString()} />)
+      }
+      return x;
+    }
+    dayPickerOptions(){
+      var x = [];
+      for(var i = 1; i <= 31; i++){
+        x.push(<Picker.Item key={i} label={i.toString()} value={i.toString()} />)
+      }
+      return x;
+    }
     getPermissionAsync = async () => {
       if (Constants.platform.ios) {
-        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
-        }
+        await Permissions.askAsync(Permissions.CAMERA_ROLL);
       }
     }
     _pickImage = async () => {
@@ -160,19 +322,32 @@ export default class PostAShowScreen extends React.Component {
         });
         return;
       }
-      this.setState({loadingSpinner:<Spinner color='black' />});
+      this.setState({loadingSpinner:<Spinner color='#000000' />});
       this.setState({pending:true});
       const fileInfo = await FileSystem.getInfoAsync(this.state.show_picture);
       if (fileInfo.exists) {
         let fileString = await FileSystem.readAsStringAsync(this.state.show_picture, { encoding: FileSystem.EncodingType.Base64  });
-        let JsonString =  '{"show_picture":"' + fileString + '"}';
         let options = {
           headers: {
             'Content-Type': "application/json",
           }
         }
-
-        Axios.post(config.url + '/api/Show/Create' + "?session_id=" + global.session_id + "&start_time=" + this.state.month + "/" + this.state.day + "/" + this.state.year + " " + this.state.show_start_time + ":00 " + this.state.show_start_time_AM_PM + "&end_time="+ this.state.month + "/" + this.state.day + "/" + this.state.year + " " + this.state.show_end_time + ":00 " + this.state.show_end_time_AM_PM + "&street_address=" + this.state.street_address + "&city=" + this.state.city + "&state=" + this.state.state + "&performer_name=" + this.state.performer_name + "&venue_name=" + this.state.venue_name + "&description=" + this.state.description + "&ticket_information=" + this.state.ticket_information + "&title=" + this.state.title, JsonString, options)
+        var showObj = {
+          show_picture: fileString,
+          start_time: this.state.month + "/" + this.state.day + "/" + this.state.year + " " + this.state.show_start_time + ":" + this.state.show_start_time_minutes + " " + this.state.show_start_time_AM_PM,
+          end_time: this.state.month + "/" + this.state.day + "/" + this.state.year + " " + this.state.show_end_time + ":" + this.state.show_end_time_minutes + " " + this.state.show_end_time_AM_PM,
+          street_address: this.state.street_address,
+          city: this.state.city,
+          state: this.state.state,
+          performer_name: this.state.performer_name,
+          venue_name: this.state.venue_name,
+          description: this.state.description,
+          ticket_information: this.state.ticket_information,
+          title: this.state.title,
+        }
+        let JsonString = JSON.stringify(showObj)
+        console.log(JsonString)
+        Axios.post(config.url + '/api/Show/Create' + "?session_id=" + global.session_id, JsonString, options)
         .then(obj => {
           if(obj.data.isSuccess)
           {
@@ -224,33 +399,6 @@ export default class PostAShowScreen extends React.Component {
       this.setState({show_picture:null});
     }
     validate = () => {
-      if(yearRegex.test(this.state.year) == false)
-      {
-        return false;
-      }
-      if(monthRegex.test(this.state.month) == false)
-      {
-        return false;
-      }
-      if(dayRegex.test(this.state.day) == false)
-      {
-        return false;
-      }
-      if(AMPMRegex.test(this.state.show_start_time_AM_PM) == false )
-      {
-        return false;
-      }
-      if(AMPMRegex.test(this.state.show_end_time_AM_PM) == false)
-      {
-        return false;
-      }
-      if(timeRegex.test(this.state.show_start_time) == false)
-      {
-        return false;
-      }
-      if(timeRegex.test(this.state.show_end_time) == false)
-      {
-        return false;
-      }
+
     }
 } 
