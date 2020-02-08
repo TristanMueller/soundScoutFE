@@ -363,7 +363,7 @@ export default class PostAShowScreen extends React.Component {
             this.setState({loadingSpinner:null});
           }else{
             Toast.show({
-              text: 'Failed to post show!',
+              text: obj.data.errorMessage,
               buttonText: 'Okay',
               duration: 3000,
               position:'top',
