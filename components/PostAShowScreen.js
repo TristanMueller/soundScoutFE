@@ -2,7 +2,7 @@ import React from 'react';
 import { View,ScrollView } from 'react-native';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {Button, H1, Item, Input,Text,Icon,Thumbnail, Container,Spinner,Toast,Root,Picker} from 'native-base';
+\import {Button, H1, Item, Input,Text,Icon,Thumbnail, Container,Spinner,Toast,Root,Picker} from 'native-base';
 import DrawerToggle from './DrawerToggle';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
