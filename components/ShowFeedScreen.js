@@ -4,6 +4,14 @@ import DrawerToggle from './DrawerToggle';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right,Item,Input, H1,Spinner } from 'native-base';
 import { ScrollView } from 'react-native-gesture-handler';
 const config = require('../config/Config.json');
+import {Platform} from "react-native";
+import {AdMobBanner, AdMobInterstitial, PublisherBanner, AdMobRewarded} from 'expo-ads-admob';
+const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
+  const paddingToBottom = 20;
+  return layoutMeasurement.height + contentOffset.y >=
+    contentSize.height - paddingToBottom;
+};
+
 
 export default class ShowFeedScreen extends React.Component {
     static navigationOptions = {
@@ -14,6 +22,10 @@ export default class ShowFeedScreen extends React.Component {
         super(props);
         this.state={
             shows: [],
+            loading:false,
+            showsDisplayed:0,
+            page: 0,
+            perPage: 5,
             city:'',
             state:'',
             distance:30,
@@ -35,7 +47,14 @@ export default class ShowFeedScreen extends React.Component {
                   <Button 
                   style={{position: "absolute", bottom: 10, right: 10,flex:1}}
                   dark
-                  onPress = {() => this.getShows()}
+                  onPress = {() => {
+                    this.setState({shows:[]});
+                    this.setState({page:0});
+                    this.setState({showsDisplayed:0});
+                    setTimeout(() => {
+                      this.getShows();
+                    }, 100);
+                  }}
                   >
                       <Text>Refresh</Text>
                   </Button>
@@ -50,7 +69,14 @@ export default class ShowFeedScreen extends React.Component {
                     <Right><Button dark onPress ={() => this.getShows()}><Text>Filter</Text></Button></Right>
                   </Item>
                   {this.state.loadingSpinner? <Spinner color="black"/>:null}
-                  <ScrollView>
+                  <ScrollView 
+                    onScroll={({nativeEvent}) => {
+                      if (isCloseToBottom(nativeEvent) && this.state.loading === false) {
+                        this.getShows();
+                      }
+                    }}
+                    scrollEventThrottle={400}
+                  >
                       {this.state.shows}
                   </ScrollView>
               </Container>
@@ -60,15 +86,26 @@ export default class ShowFeedScreen extends React.Component {
     }
 
     getShows = async () => {
-        this.setState({shows:[]});
-        fetch(config.url + "/api/Show/GetList?city=" + this.state.city +'&state=' + this.state.state + '&distance=' + this.state.distance)
+        console.log(this.state.page);
+        this.setState({loading:true});
+        fetch(config.url + "/api/Show/GetList?city=" + this.state.city +'&state=' + this.state.state + '&distance=' + this.state.distance + '&page=' + this.state.page + '&perPage=' + this.state.perPage)
         .then(text=>text.json())
         .then(obj =>{
-            var shows = [];
-            for(i = 0; i < obj.result.length; i++ )
+            if(obj.result.length > 0){
+              this.setState({page:this.state.page+1});
+            }
+            for(var i = 0; i < obj.result.length; i++ )
             {
+                if(this.state.showsDisplayed % 3 === 0){
+                  this.state.shows.push(<View key={Math.random()}>
+                  <AdMobBanner
+                  bannerSize="fullBanner"
+                  adUnitID = {Platform.OS === "ios" ? config.ios_admob_banner_id: config.android_admob_banner_id}
+                  onDidFailToReceiveAdWithError={e=>console.log(e)} />
+                </View>);
+                }
                 var show = obj.result[i];
-                shows.push(        
+                this.state.shows.push(        
                   <Content
                     key= {show.id}
                   >
@@ -97,9 +134,12 @@ export default class ShowFeedScreen extends React.Component {
                     </Card>
                   </Content>
                 );
+                this.setState({showsDisplayed:this.state.showsDisplayed+1});
             }
-            this.setState({shows});
-        })
-        .catch(ex => console.log(ex));
+          })
+          .catch(ex => console.log(ex));
+          setTimeout(() => { 
+            this.setState({loading:false})
+          }, 3000);
     }
 }

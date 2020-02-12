@@ -3,5 +3,7 @@
     "url_websocket": "ws://d8fb248b.ngrok.io/api/Chat",
     "profile_picture_path" : "https://filestoragesoundscout.blob.core.windows.net/profile-pictures/",
     "profile_video_path": "https://filestoragesoundscout.blob.core.windows.net/profile-videos/",
-    "show_picture_path": "https://filestoragesoundscout.blob.core.windows.net/shows/"
+    "show_picture_path": "https://filestoragesoundscout.blob.core.windows.net/shows/",
+    "ios_admob_banner_id": "ca-app-pub-3940256099942544/6300978111",
+    "android_admob_banner_id":"ca-app-pub-3940256099942544/6300978111"
 }       

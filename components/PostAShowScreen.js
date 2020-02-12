@@ -345,8 +345,7 @@ export default class PostAShowScreen extends React.Component {
           ticket_information: this.state.ticket_information,
           title: this.state.title,
         }
-        let JsonString = JSON.stringify(showObj)
-        console.log(JsonString)
+        let JsonString = JSON.stringify(showObj);
         Axios.post(config.url + '/api/Show/Create' + "?session_id=" + global.session_id, JsonString, options)
         .then(obj => {
           if(obj.data.isSuccess)
@@ -391,8 +390,10 @@ export default class PostAShowScreen extends React.Component {
       this.setState({month:''});
       this.setState({day:''});
       this.setState({show_start_time:''});
+      this.setState({show_start_time_minutes:''});
       this.setState({show_start_time_AM_PM:''});
       this.setState({show_end_time:''});
+      this.setState({show_end_time_minutes:''});
       this.setState({show_end_time_AM_PM:''});
       this.setState({description:''});
       this.setState({ticket_information:''});
