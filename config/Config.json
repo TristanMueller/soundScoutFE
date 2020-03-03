@@ -1,9 +1,9 @@
 {
-    "url": "http://5bcc43ea.ngrok.io",
-    "url_websocket": "ws://5bcc43ea.ngrok.io/api/Chat",
+    "url": "https://soundscout.azurewebsites.net",
+    "url_websocket": "ws://soundscout.azurewebsites.net/api/Chat",
     "profile_picture_path" : "https://filestoragesoundscout.blob.core.windows.net/profile-pictures/",
     "profile_video_path": "https://filestoragesoundscout.blob.core.windows.net/profile-videos/",
     "show_picture_path": "https://filestoragesoundscout.blob.core.windows.net/shows/",
-    "ios_admob_banner_id": "ca-app-pub-3940256099942544/6300978111",
-    "android_admob_banner_id":"ca-app-pub-3940256099942544/6300978111"
+    "ios_admob_banner_id": "ca-app-pub-5461537344300076/3337402522",
+    "android_admob_banner_id":"ca-app-pub-5461537344300076/6924174184"
 }       
