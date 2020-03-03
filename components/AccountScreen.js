@@ -112,7 +112,7 @@ export default class AccountScreen extends React.Component {
                       <Text>Update Location</Text>
                   </Button>
                 </Item>
-                {this.state.customer_type == 1 ? <Item><Button  dark onPress = {() => this._pickVideo()}><Text>Add Music Demo</Text></Button></Item>: <Item></Item>}
+                {this.state.customer_type == 1 ? <Item><Button  dark onPress = {() => this._pickVideo()}><Text>Add Music Demo</Text></Button></Item>: <View></View>}
                 {this.state.customer_type ==1 ?
                 <Item>
                   <Video

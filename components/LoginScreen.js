@@ -24,16 +24,16 @@ export default class LoginScreen extends React.Component {
   render() {
 
     return (
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView scrollEnabled = {false}>
         <Container>
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Image source={require('../assets/Logo.jpg')} style={{height:200,width:200}}></Image>
             <Text style={{alignSelf: 'center'}}>{this.state.message}</Text>
             <Item>
-              <Input  onChangeText={(username) => this.setState({username})} placeholder="Username" />
+              <Input  onChangeText={(username) => this.setState({username})} placeholder="Username" value={this.state.username}/>
             </Item>
             <Item>
-              <Input  onChangeText={(password) => this.setState({password})} placeholder="Password" secureTextEntry ={true}/>
+              <Input  onChangeText={(password) => this.setState({password})} placeholder="Password" secureTextEntry ={true} value={this.state.password}/>
             </Item>
             <Item>
               <Button
@@ -51,7 +51,14 @@ export default class LoginScreen extends React.Component {
                 <Text>Sign Up</Text>
               </Button>
             </Item>
-
+            <Item>
+              <Button
+                dark 
+                onPress={() => this.props.navigation.navigate('PasswordReset')}
+                >
+                <Text>Forgot Your Password?</Text>
+              </Button>
+            </Item>
           </View>
         </Container>
       </KeyboardAwareScrollView>
@@ -68,6 +75,8 @@ export default class LoginScreen extends React.Component {
         {
           global.session_id = obj.result;
           global.username= this.state.username;
+          this.setState({username:''});
+          this.setState({password:''});
           this.props.navigation.navigate('Home');
         }else{
           this.setState({message:obj.errorMessage});

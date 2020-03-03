@@ -19,7 +19,7 @@ export default class SignUpScreen extends React.Component {
   }
   render() {
     return (
-      <KeyboardAwareScrollView>
+      <KeyboardAwareScrollView scrollEnabled = {false}>
         <Container>
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <Image source={require('../assets/Logo.jpg')} style={{height:200,width:200}}></Image>
@@ -31,16 +31,16 @@ export default class SignUpScreen extends React.Component {
             </Text>
             <Text>{this.state.errorMessage}</Text>
             <Item>
-              <Input  onChangeText={(username) => this.setState({username})} placeholder="Username" />
+              <Input  onChangeText={(username) => this.setState({username})} placeholder="Username" value={this.state.username} />
             </Item>
             <Item>
-              <Input  onChangeText={(password) => this.setState({password})} placeholder="Password" />
+              <Input  onChangeText={(password) => this.setState({password})} placeholder="Password" secureTextEntry ={true} value={this.state.password}/>
             </Item>
             <Item>
-              <Input  onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})} placeholder="Password Confirmation" />
+              <Input  onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})} placeholder="Password Confirmation" secureTextEntry ={true} value={this.state.passwordConfirmation}/>
             </Item>
             <Item>
-              <Input  onChangeText={(email) => this.setState({email})} placeholder="Email" />
+              <Input  onChangeText={(email) => this.setState({email})} placeholder="Email" value={this.state.email}/>
             </Item>
             <Item>
               <Button 
@@ -78,6 +78,10 @@ function SignUp(caller){
       if(obj.isSuccess){
         global.username = caller.state.username;
         global.session_id = obj.result;
+        caller.setState({username:''});
+        caller.setState({password:''});
+        caller.setState({passwordConfirmation:''});
+        caller.setState({email:''});
         caller.props.navigation.navigate('Home');
       }else{
         caller.setState({errorMessage:obj.errorMessage});

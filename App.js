@@ -5,6 +5,8 @@ import SignUpScreen from './components/SignUpScreen'
 import LoginScreen from './components/LoginScreen';
 import HomeScreen from './components/HomeScreen';
 import NoLoginHomeScreen from './components/NoLoginHomeScreen';
+import ConversationScreen from './components/ConversationScreen';
+import PasswordResetScreen from './components/PasswordResetScreen';
 
 const RootStack = createStackNavigator(
   {
@@ -12,6 +14,8 @@ const RootStack = createStackNavigator(
     SignUp: SignUpScreen,
     Home: HomeScreen,
     NoLoginHome: NoLoginHomeScreen,
+    Conversation: ConversationScreen,
+    PasswordReset : PasswordResetScreen
   },
   {
     initialRouteName: 'NoLoginHome',

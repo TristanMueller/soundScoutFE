@@ -54,7 +54,7 @@ export default class PostAShowScreen extends React.Component {
       return(
         <Root>
           <Container>
-            <KeyboardAwareScrollView
+            <KeyboardAwareScrollView 
               resetScrollToCoords={{ x: 0, y: 0 }}
               scrollEnabled={false}
             >

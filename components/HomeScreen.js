@@ -8,7 +8,7 @@ import FeedScreen from './FeedScreen';
 import PostAShowScreen from './PostAShowScreen';
 import ShowFeedScreen from './ShowFeedScreen';
 import ManageShowsScreen from './ManageShowsScreen';
-import ChatScreen from './ChatScreen'
+import ChatScreen from './ChatScreen';
 
 const navigator = createDrawerNavigator(
   {
@@ -17,7 +17,7 @@ const navigator = createDrawerNavigator(
     Profile : {screen:AccountScreen},
     PostAShow: {screen: PostAShowScreen},
     ManageYourShows : {screen: ManageShowsScreen},
-    Chat : {screen: ChatScreen},
+    Chat : {screen: ChatScreen}
   },
   {
     drawerType: 'back',

@@ -86,7 +86,6 @@ export default class ShowFeedScreen extends React.Component {
     }
 
     getShows = async () => {
-        console.log(this.state.page);
         this.setState({loading:true});
         fetch(config.url + "/api/Show/GetList?city=" + this.state.city +'&state=' + this.state.state + '&distance=' + this.state.distance + '&page=' + this.state.page + '&perPage=' + this.state.perPage)
         .then(text=>text.json())

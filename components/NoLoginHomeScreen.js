@@ -12,7 +12,7 @@ const navigator = createDrawerNavigator(
   {
     Shows: {screen: ShowFeedScreen},
     Artists: {screen: FeedScreen},
-    Profile : {screen:NoLoginAccountScreen},
+    Profile : {screen:NoLoginAccountScreen}
   },
   {
     drawerType: 'back',
