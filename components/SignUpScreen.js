@@ -26,6 +26,7 @@ export default class SignUpScreen extends React.Component {
             <Image source={require('../assets/Logo.jpg')} style={{height:200,width:200}}></Image>
             <Text style={{color: "#ffffff"}}>Welcome to soundScout please sign up</Text>
             <Text>
+              {renderIf(this.state.username.indexOf("!") > -1 || this.state.username.indexOf("@") > -1 ||this.state.username.indexOf("#") > -1 ||this.state.username.indexOf("$") > -1||this.state.username.indexOf("%")> -1||this.state.username.indexOf("^") > -1||this.state.username.indexOf("&") > -1||this.state.username.indexOf("*") > -1||this.state.username.indexOf("/") > -1||this.state.username.indexOf("?") > -1 ||this.state.username.indexOf(";") > -1||this.state.username.indexOf(":") > -1||this.state.username.indexOf("=") > -1||this.state.username.indexOf("+") > -1,<InvalidUsernameCharacters/>)}
               {renderIf(this.state.username.length < 5 && this.state.username.length > 0 || this.state.username.length > 25 ,<UsernameFieldValidation/>)}
               {renderIf(this.state.password.length < 10 && this.state.password.length > 0|| this.state.password.length > 50 ,<PasswordFieldValidation/>)}
               {renderIf(this.state.password !== this.state.passwordConfirmation && this.state.password.length > 0 && this.state.passwordConfirmation.length > 0, <PasswordsDontMatch />)}
@@ -120,24 +121,29 @@ function SignUp(caller){
   }
 
 }
+class InvalidUsernameCharacters extends React.Component{
+  render(){
+  return (<Text>Username Cant Contain Special Characters{"\n"}</Text>);
+  }
+}
 class PasswordsDontMatch extends React.Component{
   render() {
     return (
-      <Text>Passwords Dont Match</Text>
+      <Text>Passwords Dont Match{"\n"}</Text>
     );
   }
 }
 class UsernameFieldValidation extends React.Component{
   render() {
     return (
-      <Text>Username must be between 5 and 25 characters</Text>
+      <Text>Username must be between 5 and 25 characters{"\n"}</Text>
     );
   }
 }
 class PasswordFieldValidation extends React.Component{
   render() {
     return (
-      <Text>Password must be between 10 and 50 characters</Text>
+      <Text>Password must be between 10 and 50 characters{"\n"}</Text>
     );
   }
 }
