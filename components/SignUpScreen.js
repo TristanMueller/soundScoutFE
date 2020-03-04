@@ -3,6 +3,7 @@ import {  View, Image } from 'react-native';
 import {Button, Item, Input,Text, Container} from 'native-base';
 import { requestPermissionsAsync } from 'expo-location';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Axios from 'axios';
 const config = require('../config/Config.json');
 
 export default class SignUpScreen extends React.Component {
@@ -71,9 +72,19 @@ function SignUp(caller){
     return;
   }else{ 
     caller.setState({errorMessage:""}); 
-    fetch(config.url + '/api/Account/Setup?username=' + caller.state.username + '&password=' + caller.state.password + '&email=' + caller.state.email)
-    .then(res => res.text())
-    .then(body => JSON.parse(body))
+    let options = {
+      headers: {
+        'Content-Type': "application/json",
+      }
+    }
+    var signupObj = {
+      username:caller.state.username,
+      password:caller.state.password,
+      email:caller.state.email
+    }
+    var jsonstring = JSON.stringify(signupObj);
+    Axios.post(config.url + '/api/Account/Setup',jsonstring,options)
+    .then( obj => obj.data)
     .then(obj => {
       if(obj.isSuccess){
         global.username = caller.state.username;
@@ -88,6 +99,24 @@ function SignUp(caller){
       } 
     })
     .catch(()=> caller.setState({errorMessage:'Unknown error!'}));
+
+    // fetch(config.url + '/api/Account/Setup?username=' + caller.state.username + '&password=' + caller.state.password + '&email=' + caller.state.email)
+    // .then(res => res.text())
+    // .then(body => JSON.parse(body))
+    // .then(obj => {
+    //   if(obj.isSuccess){
+    //     global.username = caller.state.username;
+    //     global.session_id = obj.result;
+    //     caller.setState({username:''});
+    //     caller.setState({password:''});
+    //     caller.setState({passwordConfirmation:''});
+    //     caller.setState({email:''});
+    //     caller.props.navigation.navigate('Home');
+    //   }else{
+    //     caller.setState({errorMessage:obj.errorMessage});
+    //   } 
+    // })
+    // .catch(()=> caller.setState({errorMessage:'Unknown error!'}));
   }
 
 }

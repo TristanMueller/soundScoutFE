@@ -7,6 +7,7 @@ import HomeScreen from './HomeScreen';
 import { Image, View } from 'react-native';
 const config = require('../config/Config.json');
 import {Button, H1, Item, Input,Text,Icon,Thumbnail,Root,Container} from 'native-base';
+import Axios from 'axios';
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = { header: null, gesturesEnabled: false };
@@ -67,9 +68,18 @@ export default class LoginScreen extends React.Component {
   Login(){
     if(this.state.username.length > 3 && this.state.password.length > 3)
     {
-      fetch(config.url + '/api/login?username=' + this.state.username + '&password=' + this.state.password)
-      .then(res => res.text())
-      .then(body => JSON.parse(body))
+      let options = {
+        headers: {
+          'Content-Type': "application/json",
+        }
+      }
+      var loginObj = {
+        username:this.state.username,
+        password:this.state.password
+      }
+      var jsonstring = JSON.stringify(loginObj);
+      Axios.post(config.url + '/api/login',jsonstring,options)
+      .then(res => res.data)
       .then(obj => {
         if(obj.isSuccess==true)
         {

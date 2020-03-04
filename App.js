@@ -7,6 +7,7 @@ import HomeScreen from './components/HomeScreen';
 import NoLoginHomeScreen from './components/NoLoginHomeScreen';
 import ConversationScreen from './components/ConversationScreen';
 import PasswordResetScreen from './components/PasswordResetScreen';
+import {Text, Input} from 'native-base'
 
 const RootStack = createStackNavigator(
   {
@@ -27,6 +28,10 @@ const AppContainer = createAppContainer(RootStack);
 
 export default class App extends React.Component {
   render() {
+    Text.defaultProps = Text.defaultProps || {};
+    Text.defaultProps.allowFontScaling = false;
+    Input.defaultProps = Input.defaultProps || {};
+    Input.defaultProps.allowFontScaling = false;
     return <AppContainer/>
   }
 }

@@ -6,14 +6,14 @@
     "sdkVersion": "36.0.0",
     "android": {
       "package": "com.SoundScoutCo.SoundScout",
-      "versionCode": 4
+      "versionCode": 5
     },
     "platforms": [
       "ios",
       "android",
       "web"
     ],
-    "version": "3.0.1",
+    "version": "3.0.2",
     "orientation": "portrait",
     "icon": "./assets/SoundScoutHighResBlackSquareEdge.png",
     "splash": {
@@ -30,7 +30,7 @@
     "ios": {
       "bundleIdentifier": "com.SoundScoutCo.SoundScout",
       "supportsTablet": false,
-      "buildNumber": "3.0.1",
+      "buildNumber": "3.0.2",
       "infoPlist": {
         "NSCameraUsageDescription": "SounndScout requires access to your camera to let you take a profile picture.",
         "NSPhotoLibraryUsageDescription": "SoundScout needs to access your camera roll so that you can upload images and videos for your profile and show advertisements",

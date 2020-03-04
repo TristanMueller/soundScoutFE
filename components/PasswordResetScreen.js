@@ -3,6 +3,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Image, View } from 'react-native';
 const config = require('../config/Config.json');
 import {Button, H1, Item, Input,Text,Icon,Thumbnail,Root,Container} from 'native-base';
+import Axios from 'axios';
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = { header: null, gesturesEnabled: false };
@@ -72,9 +73,19 @@ export default class LoginScreen extends React.Component {
   ResetPassword(){
     if(this.state.username.length > 3 && this.state.newPassword.length > 3)
     {
-      fetch(config.url + '/api/PasswordReset/ResetPassword?username=' + this.state.username + '&newPassword=' +  this.state.newPassword + '&token=' + this.state.token)
-      .then(res => res.text())
-      .then(body => JSON.parse(body))
+      let options = {
+        headers: {
+          'Content-Type': "application/json",
+        }
+      }
+      var signupObj = {
+        username:this.state.username,
+        newPassword:this.state.newPassword,
+        token:this.state.token
+      }
+      var jsonstring = JSON.stringify(signupObj);
+      Axios.post(config.url + '/api/PasswordReset/ResetPassword',jsonstring,options)
+      .then(obj => obj.data)
       .then(obj => {
         if(obj.isSuccess==true)
         {
