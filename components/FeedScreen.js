@@ -26,6 +26,7 @@ export default class FeedScreen extends Component {
         distance: 30,
         city:'',
         state: '',
+        noShowMessage: null,
       }
   }
   componentDidMount() {
@@ -33,13 +34,20 @@ export default class FeedScreen extends Component {
   }
   content()
   {
+    if(this.state.loading ==true){
+      return;
+    }
     this.setState({loading:true})
     fetch(config.url + '/api/Account/GetAllPublicMusicians?city=' + this.state.city + '&state=' + this.state.state + '&distance=' + this.state.distance + '&page=' + this.state.page + '&perPage=' + this.state.perPage)
     .then(res => res.text())
     .then(body => JSON.parse(body))
     .then(obj => {
-      if(obj.length> 0){
+      if(obj.length === 0 && this.state.page === 0){
+        this.setState({noShowMessage:<Text style={{alignSelf:"center"}}>We couldn't find any musicians!</Text>});
+      }
+      if(obj.length > 0){
         this.setState({page:this.state.page+1});
+        this.setState({noShowMessage: null});
       }
       for(var i = 0; i < obj.length; i++ )
       {
@@ -123,7 +131,15 @@ export default class FeedScreen extends Component {
           </Item>
           <Item>
             <Input  onChangeText={(state) => this.setState({state})} placeholder= "state"/>
-            <Right><Button dark onPress ={() => this.content()}><Text>Filter</Text></Button></Right>
+            <Right><Button dark onPress ={() => {      
+              this.setState({musicians:[]});
+              this.setState({page:0});
+              this.setState({musiciansDisplayed:0});
+              setTimeout(() => {
+                this.content();
+              }, 100);}}
+              >
+                <Text>Filter</Text></Button></Right>
           </Item>
               <ScrollView
                 onScroll={({nativeEvent}) => {
@@ -133,7 +149,8 @@ export default class FeedScreen extends Component {
                 }}
                 scrollEventThrottle={400}
               >
-                  {this.state.musicians}
+                {this.state.noShowMessage}
+                {this.state.musicians}
               </ScrollView>
           </Container>
         </View>

@@ -29,6 +29,7 @@ export default class ShowFeedScreen extends React.Component {
             city:'',
             state:'',
             distance:30,
+            noShowMessage:null
         }
     }
 
@@ -48,12 +49,14 @@ export default class ShowFeedScreen extends React.Component {
                   style={{position: "absolute", bottom: 10, right: 10,flex:1}}
                   dark
                   onPress = {() => {
-                    this.setState({shows:[]});
-                    this.setState({page:0});
-                    this.setState({showsDisplayed:0});
-                    setTimeout(() => {
-                      this.getShows();
-                    }, 100);
+                    if(this.state.loading ==false){
+                      this.setState({shows:[]});
+                      this.setState({page:0});
+                      this.setState({showsDisplayed:0});
+                      setTimeout(() => {
+                        this.getShows();
+                      }, 100);
+                    }
                   }}
                   >
                       <Text>Refresh</Text>
@@ -66,7 +69,17 @@ export default class ShowFeedScreen extends React.Component {
                   </Item>
                   <Item>
                     <Input  onChangeText={(state) => this.setState({state})} placeholder= "state"/>
-                    <Right><Button dark onPress ={() => this.getShows()}><Text>Filter</Text></Button></Right>
+                    <Right><Button dark  
+                    onPress = {() => {
+                    if(this.state.loading ==false){
+                      this.setState({shows:[]});
+                      this.setState({page:0});
+                      this.setState({showsDisplayed:0});
+                      setTimeout(() => {
+                        this.getShows();
+                      }, 100);
+                    }
+                  }}><Text>Filter</Text></Button></Right>
                   </Item>
                   {this.state.loadingSpinner? <Spinner color="black"/>:null}
                   <ScrollView 
@@ -77,7 +90,8 @@ export default class ShowFeedScreen extends React.Component {
                     }}
                     scrollEventThrottle={400}
                   >
-                      {this.state.shows}
+                    {this.state.shows}
+                    {this.state.noShowMessage}
                   </ScrollView>
               </Container>
           </View>
@@ -86,12 +100,19 @@ export default class ShowFeedScreen extends React.Component {
     }
 
     getShows = async () => {
+        if(this.state.loading ==true){
+          return;
+        }
         this.setState({loading:true});
         fetch(config.url + "/api/Show/GetList?city=" + this.state.city +'&state=' + this.state.state + '&distance=' + this.state.distance + '&page=' + this.state.page + '&perPage=' + this.state.perPage)
         .then(text=>text.json())
         .then(obj =>{
+            if(obj.result.length === 0 && this.state.page === 0){
+              this.setState({noShowMessage:<Text style={{alignSelf:"center"}}>We couldn't find any shows!</Text>});
+            }
             if(obj.result.length > 0){
               this.setState({page:this.state.page+1});
+              this.setState({noShowMessage: null});
             }
             for(var i = 0; i < obj.result.length; i++ )
             {
