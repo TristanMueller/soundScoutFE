@@ -244,9 +244,6 @@ export default class PostAShowScreen extends React.Component {
                     <Input  onChangeText={(description) => this.setState({description})} placeholder="Description" value={this.state.description}/>
                   </Item>
                   <Item>
-                    <Input  onChangeText={(ticket_information) => this.setState({ticket_information})} placeholder="Ticket Information" value={this.state.ticket_information}/>
-                  </Item>
-                  <Item>
                     <Button dark onPress = {this._pickImage} >
                       <Text>Add A Picture</Text>
                       {this.state.show_picture? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}

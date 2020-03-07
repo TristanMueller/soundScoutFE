@@ -21,8 +21,7 @@ export default class InfoScreen extends React.Component {
                 <View style={{ flex: 1, alignItems: 'center'}}>
                     <H1>SoundScout{"\n"}</H1>
                     <Image source={require('../assets/Logo.jpg')} style={{height:200,width:200}}></Image>
-                    <Text style={{paddingHorizontal:30}}>{"\n"}SoundScout was made to connect Musicians, Venues, and Music Enthusiasts{"\n"}</Text>
-                    <Text style={{paddingHorizontal:30}}>Please send any questions, ideas, and concerns to Tristan.Mueller@soundscoutapp.com</Text>
+                    <Text>{"\n"}SoundScout was made to connect Musicians, Venues, and Music Enthusiasts{"\n"}{"\n"}Please send any questions, ideas, and concerns to Tristan.Mueller@soundscoutapp.com</Text>
                 </View>
             </View>
         </Container>

@@ -115,13 +115,15 @@ export default class ConversationScreen extends React.Component
             }
         }
         this.forceUpdate();
-        setTimeout(() => { 
-            try{
-                this.refs.message_view.scrollToEnd({animated: true});
-            }catch(ex){
-                console.log(ex);
-            }
-        }, 100);
+        if(result.length > 0){
+            setTimeout(() => { 
+                try{
+                    this.refs.message_view.scrollToEnd({animated: true});
+                }catch(ex){
+                    console.log(ex);
+                }
+            }, 100);
+        }
         setTimeout(() => { ;
             if(this._isMounted === true){
                 this.sendGetMessageRequest();

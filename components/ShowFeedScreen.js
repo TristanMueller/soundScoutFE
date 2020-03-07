@@ -135,7 +135,6 @@ export default class ShowFeedScreen extends React.Component {
                             <Text>Start Time: {show.start_time}</Text>
                             <Text>End Time: {show.end_time}</Text>
                             <Text>{show.description}</Text>
-                            <Text>{show.ticket_information}</Text>
                         </Body>
                       </CardItem>
                     </Card>
