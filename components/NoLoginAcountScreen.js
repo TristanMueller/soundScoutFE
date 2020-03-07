@@ -36,7 +36,7 @@ export default withNavigation(class NoLoginAccountScreen extends React.Component
             <Container>
                 <View style = {{ height: '100%'}}>
                     <View style={{paddingTop:"10%"}}>
-                        <DrawerToggle style={{position: "absolute", top: 0, left: 0,flex:1}}/>
+                        <DrawerToggle/>
                     </View>
                     <Container style={{justifyContent:"center",alignItems:"center"}}>
                         <Image source={require('../assets/Logo.jpg')} style={{height:200,width:200}}></Image>

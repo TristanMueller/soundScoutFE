@@ -7,12 +7,14 @@ import {createDrawerNavigator,DrawerItems} from 'react-navigation-drawer';
 import FeedScreen from './FeedScreen';
 import ShowFeedScreen from './ShowFeedScreen';
 import NoLoginAccountScreen from './NoLoginAcountScreen';
+import InfoScreen from './InfoScreen';
 
 const navigator = createDrawerNavigator(
   {
     Shows: {screen: ShowFeedScreen},
     Artists: {screen: FeedScreen},
-    Profile : {screen:NoLoginAccountScreen}
+    Profile : {screen:NoLoginAccountScreen},
+    Info : {screen:InfoScreen}
   },
   {
     drawerType: 'back',
