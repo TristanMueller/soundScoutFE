@@ -58,10 +58,13 @@ export default class PostAShowScreen extends React.Component {
               resetScrollToCoords={{ x: 0, y: 0 }}
               scrollEnabled={false}
             >
-              <View style = {{ height: '100%'}}>
-                <View style={{paddingTop:"10%"}}>
-                  <DrawerToggle style={{position: "absolute", top: 0, left: 0,flex:1}}/>
+            <View style = {{ height: '100%',paddingTop:"10%"}}>
+              <View style={{flexDirection:"row"}}>
+                <View>
+                  <DrawerToggle/>
                 </View>
+                <H1 style={{alignSelf:"center",justifyContent:"center"}}>Post A Show</H1>
+              </View>
                 <View style = {{alignItems: 'center' }}>
                   <Item>
                     <Input onChangeText={(venue_name) => this.setState({venue_name})} placeholder="Venue Name" value={this.state.venue_name} />

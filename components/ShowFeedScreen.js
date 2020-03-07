@@ -42,26 +42,13 @@ export default class ShowFeedScreen extends React.Component {
 
       return(
         <Container>
-          <View style = {{ height: '100%'}}>
-              <View style={{paddingTop:"10%"}}>
-                  <DrawerToggle style={{position: "absolute", top: 0, left: 0,flex:1}}/>
-                  <Button 
-                  style={{position: "absolute", bottom: 10, right: 10,flex:1}}
-                  dark
-                  onPress = {() => {
-                    if(this.state.loading ==false){
-                      this.setState({shows:[]});
-                      this.setState({page:0});
-                      this.setState({showsDisplayed:0});
-                      setTimeout(() => {
-                        this.getShows();
-                      }, 100);
-                    }
-                  }}
-                  >
-                      <Text>Refresh</Text>
-                  </Button>
+          <View style = {{ height: '100%',paddingTop:"10%"}}>
+            <View style={{flexDirection:"row"}}>
+              <View>
+                <DrawerToggle/>
               </View>
+              <H1 style={{alignSelf:"center",justifyContent:"center"}}>Shows</H1>
+            </View>
               <Container>
                   <Item>
                     <Input  onChangeText={(city) => this.setState({city})} placeholder= "city"/>
@@ -79,7 +66,7 @@ export default class ShowFeedScreen extends React.Component {
                         this.getShows();
                       }, 100);
                     }
-                  }}><Text>Filter</Text></Button></Right>
+                  }}><Text>Search</Text></Button></Right>
                   </Item>
                   {this.state.loadingSpinner? <Spinner color="black"/>:null}
                   <ScrollView 

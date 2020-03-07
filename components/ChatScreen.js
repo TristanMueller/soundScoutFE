@@ -31,9 +31,10 @@ export default class ChatScreen extends React.Component
     render(){
         return(
             <Container>
-                <View style = {{ height: '100%'}}>
-                    <View style={{paddingTop:"10%"}}>
+                <View style = {{ height: '100%',paddingTop:"10%"}}>
+                    <View style={{flexDirection:"row"}}>
                         <DrawerToggle style={{position: "absolute", top: 0, left: 0,flex:1}}/>
+                        <H1 style={{alignSelf:"center",justifyContent:"center"}}>Chat</H1>
                         <Button 
                         style={{position: "absolute", bottom: 10, right: 10,flex:1}}
                         dark

@@ -3,20 +3,19 @@ import {  View, Text,Image } from 'react-native';
 import {Button} from 'native-base';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { withNavigation } from 'react-navigation';
+import { AntDesign } from '@expo/vector-icons';
 
 
 class DrawerToggle extends React.Component{
     render(){
         return(
-        <View>
+        <View style={{width:64,height:64}}>
             <TouchableOpacity
                 onPress={() => {
                 this.props.navigation.toggleDrawer();
                 }}
             >
-                <Image
-                    source={require('../assets/DrawerToggle.png')}
-                />
+            <AntDesign  name="bars" color="black" size={64}/>
             </TouchableOpacity>
         </View>
         );

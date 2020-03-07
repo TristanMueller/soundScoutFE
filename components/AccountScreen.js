@@ -31,105 +31,111 @@ export default class AccountScreen extends React.Component {
       return(
         <Root>
           <Container>
-              <View style={{paddingTop:"10%"}}>
-                <DrawerToggle style={{position: "absolute", top: 0, left: 0,flex:1}}/>
-                <Button
-                  style={{position: "absolute", bottom: 10, right: 10,flex:1}}
-                  dark
-                  onPress = {() => {
-                    global.session_id = null;
-                    global.username = null;
-                    this.props.navigation.navigate('Login');
-                  }}
-                  >
-                      <Text>Logout</Text>
-                  </Button>
-              </View>
-            <Item>
-              <Left>
-                <TouchableOpacity
-                  onPress = {()=>this._pickImage()} 
-                >
-                  <Thumbnail large square source={{uri:this.state.profile_picture, cache:'reload'}} defaultSource={require('../assets/avatar.png')}/>
-                </TouchableOpacity>
-              </Left>
-              <Right>
-                <Body>
-                  <H2>{global.username}</H2>
-                  <Text>Located in {this.state.city}, {this.state.state}</Text>
-                </Body>
-              </Right>
-            </Item>
-            <Container>
-              <Content padder>
-                <H3>Profile Description</H3>
-                <Textarea rowSpan={5} bordered placeholder={this.state.profile_description}  onChangeText={(profile_description) => this.setState({profile_description})} value={this.state.profile_description} />
-                <Item>
+
+            <View style = {{ height: '100%',paddingTop:"10%"}}>
+              <View style={{flexDirection:"row"}}>
+                  <View>
+                    <DrawerToggle/>
+                  </View>
+                  <H1 style={{alignSelf:"center",justifyContent:"center"}}>Profile</H1>
                   <Button
-                  dark
-                  onPress = {() => {
-                    this.updateDescription();
-                    Keyboard.dismiss();
-                  }}
+                    style={{position: "absolute", bottom: 10, right: 10,flex:1}}
+                    dark
+                    onPress = {() => {
+                      global.session_id = null;
+                      global.username = null;
+                      this.props.navigation.navigate('Login');
+                    }}
+                    >
+                        <Text>Logout</Text>
+                    </Button>
+                </View>
+              <Item>
+                <Left>
+                  <TouchableOpacity
+                    onPress = {()=>this._pickImage()} 
                   >
-                    <Text>Update Description</Text>
-                  </Button>
-                </Item>
-                <Item style= {{alignItems:'center'}}>
-                  <H3>Profile Type</H3>
-                </Item>
-                <Item>
-                  <Left>
-                    <Button dark onPress = {() => this.updateCustomerType(0)}>
-                      <Text>Normal</Text>
-                      {this.state.customer_type == 0 ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
+                    <Thumbnail large square source={{uri:this.state.profile_picture, cache:'reload'}} defaultSource={require('../assets/avatar.png')}/>
+                  </TouchableOpacity>
+                </Left>
+                <Right>
+                  <Body>
+                    <H2>{global.username}</H2>
+                    <Text>Located in {this.state.city}, {this.state.state}</Text>
+                  </Body>
+                </Right>
+              </Item>
+              <Container>
+                <Content padder>
+                  <H3>Profile Description</H3>
+                  <Textarea rowSpan={5} bordered placeholder={this.state.profile_description}  onChangeText={(profile_description) => this.setState({profile_description})} value={this.state.profile_description} />
+                  <Item>
+                    <Button
+                    dark
+                    onPress = {() => {
+                      this.updateDescription();
+                      Keyboard.dismiss();
+                    }}
+                    >
+                      <Text>Update Description</Text>
                     </Button>
-                  </Left>
-                    <Text>Find local shows</Text>
-                </Item>
-                <Item>
-                  <Left>
-                    <Button dark onPress = {() => this.updateCustomerType(1)}>
-                      <Text>Artists</Text>
-                      {this.state.customer_type == 1 ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
-                    </Button>
-                  </Left>
-                    <Text>Find venues</Text>
-                </Item>
-                <Item>
-                  <Left>
-                    <Button dark onPress = {() => this.updateCustomerType(2)}>
-                      <Text>Venues</Text>
-                      {this.state.customer_type == 2 ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
-                    </Button>
-                  </Left>
-                    <Text>Find shows and musicians</Text>
-                </Item>
-                <Item>
-                  <Input  onChangeText={(city) => this.setState({city})} placeholder="City"/>
-                  <Input  onChangeText={(state) => this.setState({state})} placeholder="State" />
-                <Button dark onPress = {() => this.updateLocation()}>
-                      <Text>Update Location</Text>
-                  </Button>
-                </Item>
-                {this.state.customer_type == 1 ? <Item><Button  dark onPress = {() => this._pickVideo()}><Text>Add Music Demo</Text></Button></Item>: <View></View>}
-                {this.state.customer_type ==1 ?
-                <Item>
-                  <Video
-                    source={{ uri: this.state.profile_video,cache:"reload" }}
-                    rate={1.0}
-                    volume={1.0}
-                    isMuted={false}
-                    useNativeControls
-                    resizeMode = {Video.RESIZE_MODE_STRETCH}
-                    style={{ width:"100%",height:200}}
-                  />
                   </Item>
-                  :
-                  <Item></Item>
-                }
-              </Content>
-            </Container>
+                  <Item style= {{alignItems:'center'}}>
+                    <H3>Profile Type</H3>
+                  </Item>
+                  <Item>
+                    <Left>
+                      <Button dark onPress = {() => this.updateCustomerType(0)}>
+                        <Text>Normal</Text>
+                        {this.state.customer_type == 0 ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
+                      </Button>
+                    </Left>
+                      <Text>Find local shows</Text>
+                  </Item>
+                  <Item>
+                    <Left>
+                      <Button dark onPress = {() => this.updateCustomerType(1)}>
+                        <Text>Artists</Text>
+                        {this.state.customer_type == 1 ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
+                      </Button>
+                    </Left>
+                      <Text>Find venues</Text>
+                  </Item>
+                  <Item>
+                    <Left>
+                      <Button dark onPress = {() => this.updateCustomerType(2)}>
+                        <Text>Venues</Text>
+                        {this.state.customer_type == 2 ? <Icon name='checkmark-circle' /> : <Icon name='close-circle' />}
+                      </Button>
+                    </Left>
+                      <Text>Find shows and musicians</Text>
+                  </Item>
+                  <Item>
+                    <Input  onChangeText={(city) => this.setState({city})} placeholder="City"/>
+                    <Input  onChangeText={(state) => this.setState({state})} placeholder="State" />
+                  <Button dark onPress = {() => this.updateLocation()}>
+                        <Text>Update Location</Text>
+                    </Button>
+                  </Item>
+                  {this.state.customer_type == 1 ? <Item><Button  dark onPress = {() => this._pickVideo()}><Text>Add Music Demo</Text></Button></Item>: <View></View>}
+                  {this.state.customer_type ==1 ?
+                  <Item>
+                    <Video
+                      source={{ uri: this.state.profile_video,cache:"reload" }}
+                      rate={1.0}
+                      volume={1.0}
+                      isMuted={false}
+                      useNativeControls
+                      resizeMode = {Video.RESIZE_MODE_STRETCH}
+                      style={{ width:"100%",height:200}}
+                    />
+                    </Item>
+                    :
+                    <Item></Item>
+                  }
+                </Content>
+              </Container>
+            </View>
           </Container>
         </Root>
       );

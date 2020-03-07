@@ -106,24 +106,13 @@ export default class FeedScreen extends Component {
   render() {
     return (
       <Container>
-        <View style = {{ height: '100%'}}>
-          <View style={{paddingTop:"10%"}}>
-            <DrawerToggle style={{position: "absolute", top: 0, left: 0,flex:1}}/>
-            <Button 
-            style={{position: "absolute", bottom: 10, right: 10,flex:1}}
-            dark
-            onPress = {() => {
-              this.setState({musicians:[]});
-              this.setState({page:0});
-              this.setState({musiciansDisplayed:0});
-              setTimeout(() => {
-                this.content();
-              }, 100);
-            }}
-            >
-                <Text>Refresh</Text>
-            </Button>
-          </View>
+          <View style = {{ height: '100%',paddingTop:"10%"}}>
+            <View style={{flexDirection:"row"}}>
+              <View>
+                <DrawerToggle/>
+              </View>
+              <H1 style={{alignSelf:"center",justifyContent:"center"}}>Artists</H1>
+            </View>
           <Container>
           <Item>
             <Input  onChangeText={(city) => this.setState({city})} placeholder= "city"/>
@@ -139,7 +128,7 @@ export default class FeedScreen extends Component {
                 this.content();
               }, 100);}}
               >
-                <Text>Filter</Text></Button></Right>
+                <Text>Search</Text></Button></Right>
           </Item>
               <ScrollView
                 onScroll={({nativeEvent}) => {
