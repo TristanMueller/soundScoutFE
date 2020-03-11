@@ -75,7 +75,7 @@ export default class ShowFeedScreen extends React.Component {
                         this.getShows();
                       }
                     }}
-                    scrollEventThrottle={400}
+                    scrollEventThrottle={1000}
                   >
                     {this.state.shows}
                     {this.state.noShowMessage}
